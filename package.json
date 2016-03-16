@@ -5,10 +5,12 @@
   "main": "promisify.dist.js",
   "scripts": {
     "build": "babel promisify.src.js -o promisify.dist.js",
+    "pretest": "npm run build && npm run lint",
     "test": "node test | tap-spec",
+    "test-only": "node test | tap-spec",
     "lint": "eslint .",
-    "prepublish": "npm run build && npm run lint && npm test",
-    "preversion": "npm run build && npm run lint && npm test"
+    "prepublish": "npm test",
+    "preversion": "npm test"
   },
   "repository": {
     "type": "git",
