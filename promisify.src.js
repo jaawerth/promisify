@@ -1,37 +1,39 @@
-
 'use strict';
 
-function promisify(nodebackFn, context) {
-  if (arguments.length >= 2) {
-    return boundPromisify(nodebackFn, context);
-  } else {
-    return unboundPromisify(nodebackFn);
+function create(Promise) {
+  promisify.create = create; // So we can instantiate with compliant promises
+
+  function promisify(nodebackFn, context) {
+    if (arguments.length >= 2) {
+      return boundPromisify(nodebackFn, context);
+    } else {
+      return unboundPromisify(nodebackFn);
+    }
   }
-}
 
-function unboundPromisify(nodebackFn) {
-  return function promisified() {
-    const args = Array.prototype.slice.call(arguments);
-    return new Promise((resolve, reject) => {
-      args.push(function callback(err, res) {
-        if (err) reject(err); else resolve(res);
+  function unboundPromisify(nodebackFn) {
+    return function promisified(...args) {
+      return new Promise((resolve, reject) => {
+        args.push(function callback(err, res) {
+          if (err) reject(err); else resolve(res);
+        });
+        nodebackFn.apply(this, args);
       });
-      nodebackFn.apply(this, args);
-    });
-  };
-}
+    };
+  }
 
-function boundPromisify(nodebackFn, thisArg) {
-  return function promisfied() {
-    var args = Array.prototype.slice.call(arguments);
-    return new Promise((resolve ,reject) => {
-      args.push(function callback(err, res) {
-        if (err) reject(err); else resolve(res);
+  function boundPromisify(nodebackFn, thisArg) {
+    return function promisfied(...args) {
+      return new Promise((resolve ,reject) => {
+        args.push(function callback(err, res) {
+          if (err) reject(err); else resolve(res);
+        });
+        nodebackFn.apply(thisArg, args);
       });
-      nodebackFn.apply(thisArg, args);
-    });
-  };
+    };
+  }
+
+  return promisify;
 }
 
-
-module.exports = promisify;
+module.exports = create(global.Promise);
