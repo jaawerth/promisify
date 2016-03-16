@@ -1,5 +1,7 @@
 'use strict';
 
+module.exports = create(global.Promise);
+
 function create(Promise) {
   promisify.create = create; // So we can instantiate with compliant promises
 
@@ -35,5 +37,3 @@ function create(Promise) {
 
   return promisify;
 }
-
-module.exports = create(global.Promise);
