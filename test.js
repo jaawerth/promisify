@@ -1,7 +1,7 @@
 'use strict';
 
 var test      = require('tape');
-var promisify = require('./promisify.dist.js');
+var promisify = require('./');
 
 
 function timeoutCB(withError, withValue, callback) {
