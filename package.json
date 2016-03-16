@@ -32,5 +32,8 @@
     "eslint-config-jw": "^1.1.0",
     "tap-spec": "^4.1.1",
     "tape": "^4.5.1"
+  },
+  "dependencies": {
+    "babel-runtime": "^6.6.1"
   }
 }
