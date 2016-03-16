@@ -7,7 +7,7 @@
     "build": "babel promisify.src.js -o promisify.dist.js",
     "test": "node test | tap-spec",
     "lint": "eslint .",
-    "prepublish": "npm build && npm lint && npm test"
+    "prepublish": "npm run build && npm run lint && npm test"
   },
   "repository": {
     "type": "git",
