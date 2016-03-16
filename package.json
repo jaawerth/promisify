@@ -1,6 +1,6 @@
 {
   "name": "@jaawerth/promisify",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Simple, straightforward promisification for callback-based asynchronous functions.",
   "main": "promisify.dist.js",
   "scripts": {
