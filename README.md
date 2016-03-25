@@ -5,7 +5,7 @@ This is a straightforward, no-frills implementation that will work on any asynch
 
 You can always use the promisify that comes with [Bluebird](http://bluebirdjs.com/docs/api/promise.promisify.html), but sometimes you may want to keep things native.
 
-## Installation
+## Install
 ```
 npm install @jaawerth/promisify
 ```
